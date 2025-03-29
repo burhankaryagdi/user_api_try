@@ -18,9 +18,6 @@ class _LoginPageState extends State<LoginPage> {
   bool isLoading = false;
 
   Future<Data?> login() async {
-    String email = emailController.text;
-    String password = passwordController.text;
-
     setState(() {
       isLoading = true;
     });
@@ -29,7 +26,10 @@ class _LoginPageState extends State<LoginPage> {
     var res = await http.post(
       url,
       headers: {"Content-Type": "application/json"},
-      body: jsonEncode({"email": email, "password": password}),
+      body: jsonEncode({
+        "email": emailController.text,
+        "password": passwordController.text,
+      }),
     );
 
     setState(() {
